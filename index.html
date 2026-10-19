@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174b35">
+<title>واحة الطير - حسابات المزرعة</title>
+<style>
+:root{--g:#174b35;--g2:#2c7650;--gold:#c9a34a;--bg:#f3f7f2;--red:#c0392b;--green:#218653;--line:#dce6dc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#243329;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,#123b2a,#26704b);color:white;padding:22px 15px;border-bottom:4px solid var(--gold)}
+.wrap{max-width:1000px;margin:auto;padding:0 13px}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{width:58px;height:58px;border:2px solid var(--gold);border-radius:17px;display:grid;place-items:center;font-size:31px}
+h1{font-size:25px;margin:0}
+header p{margin:2px 0;color:#e4eee5;font-size:13px}
+main{padding:18px 0 35px}
+h2{font-size:18px;color:var(--g);margin:0 0 13px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.stat,.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:0 2px 8px #173d2510}
+.stat label{font-size:12px;color:#68776d}
+.num{font-size:19px;font-weight:800;overflow-wrap:anywhere;margin-top:3px}
+.panel{margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700}
+input,select,textarea{width:100%;min-width:0;border:1px solid #cbd8cc;border-radius:10px;padding:11px;font:inherit;font-size:16px;background:white;color:#243329}
+textarea{min-height:65px}
+button,.filelabel{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;display:inline-block}
+.primary{background:var(--g);color:white}
+.secondary{background:#e8f0e9;color:var(--g)}
+.gold{background:#f5ecd5;color:#684f14}
+.danger{background:#fae9e7;color:#a32b20}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.calc{background:#f4f8f2;border:1px dashed #b7cbb9;border-radius:10px;padding:10px;margin-top:12px}
+.red{color:var(--red);font-weight:800}
+.green{color:var(--green);font-weight:800}
+.neutral{color:#68776d;font-weight:800}
+.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.toolbar h2{margin:0}
+.toolbar input{max-width:260px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:680px;background:white}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid #e5ece5;font-size:13px;vertical-align:top}
+th{background:#edf4ed;color:#294a34;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.muted{font-size:12px;color:#68776d}
+.smallbtn{padding:5px 8px;font-size:12px;margin:2px}
+.empty{text-align:center;color:#68776d;padding:22px}
+footer{text-align:center;font-size:12px;color:#68776d;padding:12px}
+.reporthead{display:none}
+@media(min-width:650px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.full{grid-column:1/-1}}
+@media(max-width:400px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.num{font-size:17px}}
+@media print{
+ body{background:white;color:black;font-size:11px}
+ header{background:white!important;color:black;border-bottom:2px solid #777;padding:8px}
+ .logo,.no-print,.formpanel,footer{display:none!important}
+ .wrap{max-width:none;padding:0}
+ main{padding:8px 0}
+ .stats{grid-template-columns:repeat(4,1fr);gap:5px}
+ .stat,.panel{box-shadow:none;border:1px solid #bbb;padding:7px;margin-bottom:7px;border-radius:3px}
+ .num{font-size:13px}
+ .reporthead{display:block}
+ .tablewrap{overflow:visible;border:0}
+ table{min-width:0}
+ th,td{font-size:9px;padding:4px}
+ .actions{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap brand">
+  <div class="logo">🥭</div>
+  <div><h1>واحة الطير</h1><p>نظام حسابات المزرعة</p></div>
+ </div>
+</header>
+<main class="wrap">
+ <section class="stats">
+  <div class="stat"><label>رأس المال الابتدائي</label><div class="num" id="capitalShow">20,000.000</div><div class="muted">ريال عُماني</div></div>
+  <div class="stat"><label>إجمالي المبالغ المرصودة</label><div class="num" id="plannedShow">0.000</div><div class="muted">ريال عُماني</div></div>
+  <div class="stat"><label>إجمالي المصروف الفعلي</label><div class="num" id="actualShow">0.000</div><div class="muted">ريال عُماني</div></div>
+  <div class="stat"><label>المتبقي من رأس المال</label><div class="num" id="remainingShow">20,000.000</div><div class="muted">ريال عُماني</div></div>
+ </section>
+
+ <section class="panel no-print">
+  <h2>إعدادات رأس المال</h2>
+  <div class="grid">
+   <div class="field"><label for="capital">رأس المال (ر.ع)</label><input id="capital" type="number" min="0" step="0.001" value="20000"></div>
+   <div class="field" style="justify-content:end"><button class="secondary" id="saveCapital">حفظ رأس المال</button></div>
+  </div>
+ </section>
+
+ <section class="panel formpanel no-print">
+  <h2 id="formHeading">إضافة بند جديد</h2>
+  <form id="entryForm">
+   <input type="hidden" id="editId">
+   <div class="grid">
+    <div class="field"><label for="date">تاريخ العملية</label><input id="date" type="date" required></div>
+    <div class="field"><label for="category">نوع البند</label>
+     <select id="category">
+      <option>تأسيس وتجهيز</option><option>شتلات المانجو</option><option>ري ومياه</option><option>أسمدة وتربة</option><option>عمالة</option><option>معدات وأدوات</option><option>وقود ونقل</option><option>صيانة</option><option>كهرباء</option><option>إيجار</option><option>أخرى</option>
+     </select>
+    </div>
+    <div class="field"><label for="description">اسم البند</label><input id="description" required placeholder="مثال: شراء شتلات مانجو"></div>
+    <div class="field"><label for="planned">المبلغ المرصود (ر.ع)</label><input id="planned" type="number" min="0" step="0.001" required placeholder="0.000"></div>
+    <div class="field"><label for="actual">المبلغ الحقيقي (ر.ع)</label><input id="actual" type="number" min="0" step="0.001" required placeholder="0.000"></div>
+    <div class="field full"><label for="notes">ملاحظات</label><textarea id="notes" placeholder="تفاصيل إضافية أو رقم الفاتورة"></textarea></div>
+   </div>
+   <div class="calc">الفرق: <span id="liveDiff" class="neutral">0.000 ر.ع — لا يوجد فرق</span>
+    <div class="muted">الزيادة عن المرصود بالأحمر، والتوفير بالأخضر.</div>
+   </div>
+   <div class="buttons"><button class="primary" type="submit" id="submitBtn">حفظ البند</button><button class="secondary" type="button" id="clearBtn">تفريغ الحقول</button></div>
+  </form>
+ </section>
+
+ <section class="panel">
+  <div class="toolbar"><h2>سجل المصروفات</h2><input class="no-print" id="search" placeholder="ابحث عن بند..." aria-label="بحث"></div>
+  <div class="reporthead"><h2>واحة الطير — تقرير حسابات المزرعة</h2><p id="reportInfo"></p></div>
+  <div class="tablewrap">
+   <table>
+    <thead><tr><th>التاريخ</th><th>البند</th><th>المرصود</th><th>الحقيقي</th><th>الفرق</th><th>ملاحظات</th><th class="actions no-print">إجراءات</th></tr></thead>
+    <tbody id="rows"></tbody>
+    <tfoot id="totals"></tfoot>
+   </table>
+  </div>
+  <div class="buttons no-print">
+   <button class="primary" id="pdfBtn">طباعة / حفظ PDF</button>
+   <button class="secondary" id="csvBtn">تصدير CSV</button>
+   <button class="gold" id="backupBtn">تنزيل نسخة احتياطية</button>
+   <label class="filelabel secondary" for="restoreFile">استعادة نسخة</label>
+   <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+  </div>
+ </section>
+ <footer>واحة الطير • احتفظ بنسخة احتياطية من بياناتك بشكل دوري.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const KEY="wahatAlTairAccountsV1";
+const today=()=>{
+ const d=new Date();
+ return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+};
+const money=n=>Number(n||0).toLocaleString("en-US",{minimumFractionDigits:3,maximumFractionDigits:3})+" ر.ع";
+const safe=n=>Math.max(0,Number(n)||0);
+const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let state={capital:20000,entries:[]};
+try{
+ const saved=localStorage.getItem(KEY);
+ if(saved){
+  const obj=JSON.parse(saved);
+  if(obj&&Array.isArray(obj.entries)&&Number.isFinite(Number(obj.capital))){
+   state={capital:Number(obj.capital),entries:obj.entries};
+  }
+ }
+}catch(e){}
+function save(){
+ try{localStorage.setItem(KEY,JSON.stringify(state));}
+ catch(e){alert("تعذر حفظ البيانات. نزّل نسخة احتياطية وجرّب متصفحًا آخر.");}
+}
+function diffClass(d){return d>0.0005?"red":d< -0.0005?"green":"neutral";}
+function diffLabel(d){
+ if(d>0.0005)return "+"+money(d)+" زيادة";
+ if(d< -0.0005)return money(Math.abs(d))+" توفير";
+ return money(0)+" — لا يوجد فرق";
+}
+function render(){
+ $("capital").value=state.capital;
+ $("capitalShow").textContent=money(state.capital);
+ const planned=state.entries.reduce((s,e)=>s+Number(e.planned||0),0);
+ const actual=state.entries.reduce((s,e)=>s+Number(e.actual||0),0);
+ $("plannedShow").textContent=money(planned);
+ $("actualShow").textContent=money(actual);
+ $("remainingShow").textContent=money(state.capital-actual);
+ const q=$("search").value.trim().toLowerCase();
+ const list=state.entries.filter(e=>[e.date,e.category,e.description,e.notes].join(" ").toLowerCase().includes(q)).slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+ $("rows").innerHTML=list.length?list.map(e=>{
+  const d=Number(e.actual)-Number(e.planned);
+  return `<tr>
+   <td>${escapeHTML(e.date)}</td>
+   <td><strong>${escapeHTML(e.description)}</strong><div class="muted">${escapeHTML(e.category)}</div></td>
+   <td>${money(e.planned)}</td><td>${money(e.actual)}</td>
+   <td class="${diffClass(d)}">${diffLabel(d)}</td>
+   <td>${escapeHTML(e.notes||"—")}</td>
+   <td class="actions no-print"><button class="smallbtn secondary" data-edit="${e.id}">تعديل</button><button class="smallbtn danger" data-delete="${e.id}">حذف</button></td>
+  </tr>`;
+ }).join(""):`<tr><td colspan="7" class="empty">${q?"لا توجد نتائج.":"لا توجد بنود مسجلة بعد."}</td></tr>`;
+ const dsum=actual-planned;
+ $("totals").innerHTML=`<tr><th colspan="2">الإجمالي</th><th>${money(planned)}</th><th>${money(actual)}</th><th class="${diffClass(dsum)}">${diffLabel(dsum)}</th><th colspan="2"></th></tr>`;
+ $("reportInfo").textContent="تاريخ التقرير: "+today()+" | رأس المال: "+money(state.capital)+" | المتبقي: "+money(state.capital-actual);
+}
+function updateDiff(){
+ const d=safe($("actual").value)-safe($("planned").value);
+ $("liveDiff").className=diffClass(d);
+ $("liveDiff").textContent=diffLabel(d);
+}
+function clearForm(){
+ $("entryForm").reset();
+ $("editId").value="";
+ $("date").value=today();
+ $("formHeading").textContent="إضافة بند جديد";
+ $("submitBtn").textContent="حفظ البند";
+ updateDiff();
+}
+function download(blob,name){
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download=name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("date").value=today();
+$("saveCapital").addEventListener("click",()=>{
+ const v=Number($("capital").value);
+ if(!Number.isFinite(v)||v<0){alert("أدخل رأس مال صحيحًا.");return;}
+ state.capital=v;save();render();alert("تم حفظ رأس المال.");
+});
+["planned","actual"].forEach(id=>$(id).addEventListener("input",updateDiff));
+$("entryForm").addEventListener("submit",ev=>{
+ ev.preventDefault();
+ const description=$("description").value.trim();
+ if(!description){alert("اكتب اسم البند.");return;}
+ const entry={
+  id:$("editId").value?Number($("editId").value):Date.now(),
+  date:$("date").value||today(),category:$("category").value,
+  description,planned:safe($("planned").value),actual:safe($("actual").value),
+  notes:$("notes").value.trim()
+ };
+ const idx=state.entries.findIndex(e=>e.id===entry.id);
+ if(idx>=0)state.entries[idx]=entry;else state.entries.push(entry);
+ save();clearForm();render();
+});
+$("clearBtn").addEventListener("click",clearForm);
+$("search").addEventListener("input",render);
+$("rows").addEventListener("click",ev=>{
+ const eb=ev.target.closest("[data-edit]");
+ const db=ev.target.closest("[data-delete]");
+ if(eb){
+  const e=state.entries.find(x=>x.id===Number(eb.dataset.edit));
+  if(!e)return;
+  $("editId").value=e.id;$("date").value=e.date;$("category").value=e.category;
+  $("description").value=e.description;$("planned").value=e.planned;$("actual").value=e.actual;
+  $("notes").value=e.notes||"";$("formHeading").textContent="تعديل بند";
+  $("submitBtn").textContent="حفظ التعديلات";updateDiff();
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ if(db){
+  const id=Number(db.dataset.delete);
+  if(confirm("هل تريد حذف هذا البند؟")){
+   state.entries=state.entries.filter(x=>x.id!==id);save();render();
+  }
+ }
+});
+$("pdfBtn").addEventListener("click",()=>window.print());
+$("csvBtn").addEventListener("click",()=>{
+ const rows=[["التاريخ","نوع البند","التفاصيل","المبلغ المرصود","المبلغ الحقيقي","الفرق","ملاحظات"],
+ ...state.entries.map(e=>[e.date,e.category,e.description,e.planned,e.actual,Number(e.actual)-Number(e.planned),e.notes||""])];
+ const csv="\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ download(new Blob([csv],{type:"text/csv;charset=utf-8;"}),"wahat-al-tair.csv");
+});
+$("backupBtn").addEventListener("click",()=>{
+ download(new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),"wahat-al-tair-backup.json");
+});
+$("restoreFile").addEventListener("change",async ev=>{
+ const file=ev.target.files[0];if(!file)return;
+ try{
+  const obj=JSON.parse(await file.text());
+  if(!obj||!Array.isArray(obj.entries)||!Number.isFinite(Number(obj.capital)))throw new Error();
+  if(!confirm("ستُستبدل البيانات الحالية بمحتوى النسخة الاحتياطية. متابعة؟"))return;
+  state={capital:Number(obj.capital),entries:obj.entries};save();render();
+  alert("تمت استعادة النسخة الاحتياطية.");
+ }catch(e){alert("الملف غير صالح أو ليس نسخة احتياطية من البرنامج.");}
+ finally{ev.target.value="";}
+});
+render();updateDiff();
+})();
+</script>
+</body>
+</html>
