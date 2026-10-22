@@ -173,6 +173,37 @@ footer{text-align:center;font-size:12px;color:#68776d;padding:12px}
     break-inside: avoid;
   }
 }
+@media print {
+  thead th {
+    background-color: #214c35 !important;
+    color: #f3dfa0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #reportInfo {
+    background-color: #f5f0df !important;
+    color: #80652b !important;
+    border: 2px solid #d4b66b !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #totals th,
+  #totals td {
+    background-color: #e5eddf !important;
+    color: #214c35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f3f6f0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 </style>
 
 <header class="farm-header">
