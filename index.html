@@ -88,6 +88,91 @@ footer{text-align:center;font-size:12px;color:#68776d;padding:12px}
   flex-shrink: 0;
   background: transparent;
 }
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #26382b !important;
+    font-family: Arial, Tahoma, sans-serif !important;
+    font-size: 11pt !important;
+    direction: rtl;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  h1, h2, h3 {
+    color: #214c35 !important;
+    font-weight: 700 !important;
+  }
+
+  #reportInfo {
+    color: #80652b !important;
+    background: #f5f0df !important;
+    border: 1px solid #d4b66b !important;
+    border-radius: 8px;
+    padding: 10px !important;
+    margin: 12px 0 !important;
+    line-height: 1.8 !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    direction: rtl;
+    font-size: 9pt !important;
+  }
+
+  thead th {
+    background: #214c35 !important;
+    color: #f3dfa0 !important;
+    padding: 10px 6px !important;
+    border: 1px solid #214c35 !important;
+    text-align: center !important;
+  }
+
+  tbody td {
+    padding: 8px 6px !important;
+    border: 1px solid #dedfd6 !important;
+    color: #26382b !important;
+    text-align: center !important;
+    overflow-wrap: anywhere;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f3f6f0 !important;
+  }
+
+  #totals th,
+  #totals td {
+    background: #e5eddf !important;
+    color: #214c35 !important;
+    border: 1px solid #c8d4c2 !important;
+    padding: 10px 6px !important;
+    font-weight: bold !important;
+  }
+
+  .muted {
+    color: #777b70 !important;
+    font-size: 9pt !important;
+  }
+
+  .no-print,
+  button,
+  input,
+  select,
+  textarea {
+    display: none !important;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+}
+
 </style>
 
 <header class="farm-header">
